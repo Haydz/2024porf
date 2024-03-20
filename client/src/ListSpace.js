@@ -1,19 +1,20 @@
+// src/ListSpace.js
 import React, { useState } from "react";
-import axios from "axios";
+import { fetchSpaceData } from "./GetSpaceAPI";
 
 const ListSpace = () => {
-  const [data, setData] = useState(""); // Correctly initialize `data` and create a `setData` function to update it
+  const [data, setData] = useState("");
+  const [error, setError] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:4000/space");
-      // Assuming the response data is what you want to display
-      setData(JSON.stringify(response.data)); // Use `setData` to update the state with the response data
+      const fetchedData = await fetchSpaceData();
+      setData(JSON.stringify(fetchedData)); // Update state with fetched data
     } catch (error) {
       console.error("Error fetching data:", error);
-      setData("Error fetching data"); // Optionally handle errors by updating state with an error message
+      setError("Error fetching data"); // Update state with error message
     }
   };
 
@@ -24,8 +25,9 @@ const ListSpace = () => {
           <label>See people in Space</label>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
+        {error && <p className="error">{error}</p>} {/* Display error if it exists */}
         <h1>Data from space:</h1>
-        <pre>{data}</pre>; {/* Display `data` here */}
+        <pre>{data}</pre> {/* Display data here */}
       </form>
     </div>
   );
