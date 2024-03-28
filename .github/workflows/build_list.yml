@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Build List Image
 run-name: ${{ github.actor }} is Building the List image 🚀
 # on: [push]
 on: [workflow_dispatch]
