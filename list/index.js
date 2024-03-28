@@ -18,6 +18,7 @@ app.get('/space', function (req, res) {
     try {
       const response = await axios.get("http://api.open-notify.org/astros.json");
       const data = response.data; // Now you can use 'data' however you like
+      
       res.json(data);
       // console.log("Data sent to client:", data);
     } catch (err) {
