@@ -18,10 +18,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: https://github.com/docker/rootfs.git#main:list
-
+          context: https://github.com/haydz/2024porf.git#main:list
           push: true
-          tags: user/app:latest
+          tags: haydzx/list:latest
 
       # on:
       #   pull_request:
