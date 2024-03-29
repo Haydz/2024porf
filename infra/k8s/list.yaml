@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: list-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: list
+  template:
+    metadata:
+      labels:
+        app: list
+    spec:
+      containers:
+        - name: list
+          image: haydzx/list
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: list-clusterip-srv
+spec:
+  selector:
+    app: list
+  type: ClusterIP
+  ports:
+    - name: list
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

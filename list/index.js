@@ -9,7 +9,7 @@ app.use(cors());
 app.get('/space', function (req, res) {
 
   //TESTING WITHOUT INTERNET
-  // console.log("Connection received to /space");
+  console.log("Connection received to /space");
   // const json = '{"result":true, "count":42}';
   // const obj = JSON.parse(json);
   // res.send(obj);

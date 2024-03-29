@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inspace-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inspace
+  template:
+    metadata:
+      labels:
+        app: inspace
+    spec:
+      containers:
+        - name: inspace
+          image: haydzx/inspace
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inspace-clusterip-srv
+spec:
+  selector:
+    app: inspace
+  type: ClusterIP
+  ports:
+    - name: inspace
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: inspace.com
+      http:
+        paths:
+          - path: /space
+            pathType: Prefix
+            backend:
+              service:
+                name: list-clusterip-srv
+                port:
+                  number: 4000
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: inspace-clusterip-srv
+                port:
+                  number: 3000
